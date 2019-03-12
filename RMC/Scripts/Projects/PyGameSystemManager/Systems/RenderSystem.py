@@ -4,18 +4,15 @@
 ---------------------------------------------------------------------------------------"""
 
 # Imports --------------------------------------------------------------------------------
-from RMC.Scripts.Projects.EventDispatcher.EventDispatcher import EventDispatcher
 from RMC.Scripts.Projects.PyGameSystemManager.Systems.System import System
 
 # Namespace ------------------------------------------------------------------------------
 
 # Class ----------------------------------------------------------------------------------
 
-class InputSystem (System):
+class RenderSystem (System):
 
     # Fields -----------------------------------------------------------------------------
-    inputPressed = None
-    OnInput = EventDispatcher()
 
     # Initialization ---------------------------------------------------------------------
     def __init__(self):
@@ -23,18 +20,23 @@ class InputSystem (System):
 
     # Methods ----------------------------------------------------------------------------
     def OnAdded(self, systemManager):
-        super(InputSystem, self).OnAdded(systemManager)
         pass
 
-    def OnInitialize (self):
+    def OnInitialize(self):
         pass
 
     def OnUpdate(self, deltaTime):
-        for event in self.systemManager.inputEvents:
-            self.OnInput.DispatchEvent(event)
         pass
 
     def OnRemoved(self):
+        pass
+
+    def PrepareRenderFrame(self):
+        self.systemManager.PG.screen.fill((0, 0, 0))
+        pass
+
+    def RenderFrame(self):
+        self.systemManager.PG.display.flip()
         pass
 
     # Event Handlers ---------------------------------------------------------------------
