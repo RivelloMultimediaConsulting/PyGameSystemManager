@@ -29,6 +29,11 @@ class MovementSystem (System):
         pass
 
     def OnInitialize (self):
+
+        screenRect = self.systemManager.PG.screen.get_rect()
+        self.x = screenRect.width/2
+        self.y = screenRect.height/3
+
         self.inputSystem = self.systemManager.GetSystem(InputSystem)
         self.inputSystem.OnInput += self.InputSystem_OnInput
         pass
