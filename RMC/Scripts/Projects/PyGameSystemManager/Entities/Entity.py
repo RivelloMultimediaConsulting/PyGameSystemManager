@@ -8,6 +8,9 @@
 # Namespace ------------------------------------------------------------------------------
 
 # Class ----------------------------------------------------------------------------------
+from pygame.rect import Rect
+
+
 class Entity (object):
 
     # Fields -----------------------------------------------------------------------------
@@ -16,6 +19,11 @@ class Entity (object):
     width = None
     height = None
     blittable = None
+
+    # Properties -------------------------------------------------------------------------
+    def GetBoundsRect(self):
+        return Rect(self.x, self.y, self.width, self.height)
+        pass
 
     # Initialization ---------------------------------------------------------------------
     def __init__(self, blittable=None):

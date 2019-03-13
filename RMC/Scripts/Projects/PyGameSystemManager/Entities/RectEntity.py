@@ -19,10 +19,6 @@ class RectEntity (Entity):
     # Fields -----------------------------------------------------------------------------
     color = None
 
-    # Properties -------------------------------------------------------------------------
-    def GetBoundsRect(self):
-        return Rect(self.x, self.y, self.width, self.height)
-        pass
 
     # Initialization ---------------------------------------------------------------------
     def __init__(self, x, y, width, height, color=Color(255, 255, 255, 255)):
