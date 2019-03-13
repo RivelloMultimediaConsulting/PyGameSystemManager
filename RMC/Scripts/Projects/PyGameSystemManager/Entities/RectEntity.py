@@ -4,49 +4,45 @@
 ---------------------------------------------------------------------------------------"""
 
 # Imports --------------------------------------------------------------------------------
-from RMC.Scripts.Projects.PyGameSystemManager.Entities.TextEntity import TextEntity
-from RMC.Scripts.Projects.PyGameSystemManager.Systems.System import System
+import pygame
+from pygame.color import Color
+from pygame.rect import Rect
+
+from RMC.Scripts.Projects.PyGameSystemManager.Entities.Entity import Entity
 
 # Namespace ------------------------------------------------------------------------------
 
 # Class ----------------------------------------------------------------------------------
 
-class GuiSystem (System):
+class RectEntity (Entity):
 
     # Fields -----------------------------------------------------------------------------
+    color = None
+
+    # Properties -------------------------------------------------------------------------
+    def GetBoundsRect(self):
+        return Rect(self.x, self.y, self.width, self.height)
+        pass
 
     # Initialization ---------------------------------------------------------------------
-    def __init__(self):
+    def __init__(self, x, y, width, height, color=Color(255, 255, 255, 255)):
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+        self.color = color
         pass
 
     # Methods ----------------------------------------------------------------------------
-    def OnAdded(self, systemManager):
-        super(GuiSystem, self).OnAdded(systemManager)
+    def Blit (self, screen):
+        pygame.draw.rect(screen,
+                          self.color,
+                          pygame.Rect(self.x, self.y, self.width, self.height))
         pass
 
-    def OnInitialize(self):
+    def __Refresh(self):
         pass
-
-    def OnUpdate(self, deltaTime):
-        screenRect = self.systemManager.PG.screen.get_rect()
-
-        textEntity = TextEntity( "Hello World!")
-        textEntity.x = screenRect.width/2 - textEntity.width / 2
-        textEntity.y = screenRect.height/2 - textEntity.height / 2
-        textEntity.Blit(self.systemManager.PG.screen)
-
-        print(textEntity.x)
-        print(textEntity.y)
-        print(textEntity.blittable)
-
-
-
-
-        pass
-
-    def OnRemoved(self):
-        pass
-
     # Event Handlers ---------------------------------------------------------------------
+
 
 

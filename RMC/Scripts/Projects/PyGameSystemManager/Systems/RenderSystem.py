@@ -4,6 +4,8 @@
 ---------------------------------------------------------------------------------------"""
 
 # Imports --------------------------------------------------------------------------------
+from RMC.Scripts.Projects.PyGameSystemManager.Entities.RectEntity import RectEntity
+from RMC.Scripts.Projects.PyGameSystemManager.Entities.TextEntity import TextEntity
 from RMC.Scripts.Projects.PyGameSystemManager.Systems.System import System
 
 # Namespace ------------------------------------------------------------------------------
@@ -13,6 +15,7 @@ from RMC.Scripts.Projects.PyGameSystemManager.Systems.System import System
 class RenderSystem (System):
 
     # Fields -----------------------------------------------------------------------------
+    entities = []
 
     # Initialization ---------------------------------------------------------------------
     def __init__(self):
@@ -27,9 +30,33 @@ class RenderSystem (System):
         pass
 
     def OnUpdate(self, deltaTime):
+        for entity in self.entities:
+            self.Blit(entity)
         pass
 
     def OnRemoved(self):
+        pass
+
+    def CreateTextEntity (self, message):
+        entity = TextEntity(message)
+        self.entities.append(entity)
+        return entity
+
+    def CreateRect (self, width, height, color):
+        entity = RectEntity(0, 0, width, height, color)
+        self.entities.append(entity)
+        return entity
+
+    def DestroyEntity(self, entity):
+        self.entities.remove(entity)
+        pass
+
+    def DestroyAllEntities(self):
+        self.entities = []
+        pass
+
+    def Blit (self, entity):
+        entity.Blit(self.systemManager.PG.screen)
         pass
 
     def PrepareRenderFrame(self):

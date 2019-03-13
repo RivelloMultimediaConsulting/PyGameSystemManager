@@ -4,20 +4,33 @@
 ---------------------------------------------------------------------------------------"""
 
 # Imports --------------------------------------------------------------------------------
+from pygame.color import Color
+
 from RMC.Scripts.Projects.PyGameSystemManager.Systems.InputSystem import InputSystem
+from RMC.Scripts.Projects.PyGameSystemManager.Systems.RenderSystem import RenderSystem
 from RMC.Scripts.Projects.PyGameSystemManager.Systems.System import System
 
 # Namespace ------------------------------------------------------------------------------
 
 # Class ----------------------------------------------------------------------------------
 
-class MovementSystem (System):
+class CustomGameSystem (System):
 
     # Fields -----------------------------------------------------------------------------
     inputSystem = None
-    speed = 5
-    x = 0
-    y = 0
+    renderSystem = None
+    guiSystem = None
+    scoreTextEntity = None
+    score = 0
+    coins = []
+
+    # Properties -------------------------------------------------------------------------
+    def SetScore(self, value):
+        self.score = value
+        self.scoreTextEntity.SetText("Score: " + str(self.score))
+
+    def GetScore(self):
+        return self.score
 
     # Initialization ---------------------------------------------------------------------
     def __init__(self):
@@ -25,30 +38,56 @@ class MovementSystem (System):
 
     # Methods ----------------------------------------------------------------------------
     def OnAdded(self, systemManager):
-        super(MovementSystem, self).OnAdded(systemManager)
+        super(CustomGameSystem, self).OnAdded(systemManager)
         pass
 
     def OnInitialize (self):
 
         screenRect = self.systemManager.PG.screen.get_rect()
-        self.x = screenRect.width/2
-        self.y = screenRect.height/3
 
+        # Input
         self.inputSystem = self.systemManager.GetSystem(InputSystem)
         self.inputSystem.OnInput += self.InputSystem_OnInput
+
+        # Render
+        self.renderSystem = self.systemManager.GetSystem(RenderSystem)
+
+        # Score Text
+        self.scoreTextEntity = self.renderSystem.CreateTextEntity("")
+        self.scoreTextEntity.x = self.scoreTextEntity.width
+        self.scoreTextEntity.y = 0
+        self.SetScore(0)
+
+        # Main Character
+        self.CustomCharacter = self.renderSystem.CreateRect(60, 60, Color(0, 0, 255, 255));
+        self.CustomCharacter.SetPosition(100, 100)
+
+        # Gold Coins
+        for i in range(5):
+            coin = self.renderSystem.CreateRect(20, 20, Color(255, 255, 0, 255))
+            coin.SetPosition(50 + i * 75, 200)
+            self.coins.append(coin)
+
         pass
 
     def OnUpdate(self, deltaTime):
-        self.PG.draw.rect(self.PG.screen, (0, 128, 255), self.PG.Rect(self.x, self.y, 60, 60))
+
+        for coin in self.coins[:]:
+            if coin.GetBoundsRect().colliderect(self.CustomCharacter.GetBoundsRect()):
+                # Reward points
+                self.SetScore(self.GetScore() + 10)
+
+                # Play Sound. TODO
+
+                # Remove coin from rendering list
+                self.renderSystem.DestroyEntity(coin)
+
+                # Remove coin from my list
+                self.coins.remove(coin)
         pass
 
     def OnRemoved(self):
         pass
-
-    def Move (self, deltaX, deltaY):
-        self.x += deltaX * self.speed
-        self.y += deltaY * self.speed
-        print("Move (%s,%s)" % (self.x, self.y))
 
     # Event Handlers ---------------------------------------------------------------------
     def InputSystem_OnInput (self, event):
@@ -68,4 +107,5 @@ class MovementSystem (System):
             elif event.key == self.systemManager.PG.K_LEFT:
                 deltaX = -1
 
-            self.Move(deltaX, deltaY)
+        self.CustomCharacter.x += deltaX * 10
+        self.CustomCharacter.y += deltaY * 10

@@ -15,16 +15,28 @@ from RMC.Scripts.Projects.PyGameSystemManager.Entities.Entity import Entity
 class TextEntity (Entity):
 
     # Fields -----------------------------------------------------------------------------
+    text = None
 
     # Initialization ---------------------------------------------------------------------
-    def __init__(self, message):
+    def __init__(self, text):
         font = pygame.font.SysFont("arial", 30)
-        text = font.render(message, True, (0, 128, 0))
-        super(TextEntity, self).__init__(text)
+        self.SetText(text)
         pass
 
     # Methods ----------------------------------------------------------------------------
+    def SetText(self, text):
+        self.text = text
+        self.__Refresh()
+        pass
 
+    def Blit(self, screen):
+        screen.blit(self.blittable, (self.x, self.y))
+        pass
+
+    def __Refresh(self):
+        font = pygame.font.SysFont("arial", 30)
+        self.SetBlittable(font.render(str(self.text), True, (0, 128, 0)))
+        pass
     # Event Handlers ---------------------------------------------------------------------
 
 
