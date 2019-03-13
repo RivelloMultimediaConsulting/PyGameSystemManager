@@ -8,12 +8,15 @@
 # Namespace ------------------------------------------------------------------------------
 
 # Class ----------------------------------------------------------------------------------
-from RMC.Scripts.Projects.PyGameSystemManager.Systems import RenderSystem, InputSystem
+from types import ModuleType
+
+from RMC.Scripts.Projects.PyGameSystemManager.Systems.RenderSystem import RenderSystem
 
 
 class SystemManager (object):
 
     # Fields -----------------------------------------------------------------------------
+    IsInitialized = False
     IsPlaying = False
     systems = []
     PG = None
@@ -37,11 +40,19 @@ class SystemManager (object):
 
     def GetSystem(self, systemType):
 
+        # I noticed if the scope using this method
+        # has improper import statements, a module (package?) is passed
+        # instead of the required type
+        if isinstance(systemType, ModuleType):
+            raise Exception("GetSystem() cannot accept module as argument. Ensure you import and pass a type instead.")
+            return None
+
         if self.systems is not None:
             for system in self.systems:
-                if (isinstance(system, systemType)):
-                    return system;
-        pass
+                if isinstance(system, systemType):
+                    return system
+
+        return None
 
     def InitializeSystems(self):
 
@@ -53,12 +64,18 @@ class SystemManager (object):
             system.OnInitialize()
 
         # Depend directly on system(s). TODO: Remove?
-        self.renderSystem = self.GetSystem(type(RenderSystem))
-        print(self.renderSystem)
-        print("can't seem to access renderSystem")
+        self.renderSystem = self.GetSystem(RenderSystem)
 
+        if self.renderSystem is not None:
+            self.IsInitialized = True
+
+        return
 
     def Play(self):
+
+        if self.IsInitialized is False:
+            raise Exception("Play() cannot be called when self.IsInitialized is False")
+            return
 
         clock = self.PG.time.Clock()
 
@@ -75,9 +92,9 @@ class SystemManager (object):
                 if event.type == self.PG.QUIT:
                     self.IsPlaying = False
 
-            #self.renderSystem.PrepareRenderFrame()
+            self.renderSystem.PrepareRenderFrame()
             self.UpdateSystems()
-           # self.renderSystem.RenderFrame()
+            self.renderSystem.RenderFrame()
 
             clock.tick(self.configuration.frameRate)
         pass

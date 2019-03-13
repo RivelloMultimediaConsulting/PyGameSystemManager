@@ -20,6 +20,7 @@ class RenderSystem (System):
 
     # Methods ----------------------------------------------------------------------------
     def OnAdded(self, systemManager):
+        super(RenderSystem, self).OnAdded(systemManager)
         pass
 
     def OnInitialize(self):
