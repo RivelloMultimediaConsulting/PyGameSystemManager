@@ -10,6 +10,12 @@ This is not a robust application architecture (e.g. MVC).
 * Python Programming
 * Python 3.7 and above supported (likely backwards compatible)
 
+**Video**
+
+<a href="https://youtu.be/DEeFTcsFk2I">
+  <img src="https://raw.githubusercontent.com/RivelloMultimediaConsulting/PyGameSystemManager/master/Documentation/PyGame_Part01_Thumbnail.png" width="300" />
+</a>
+    
 Created By
 =============
 
