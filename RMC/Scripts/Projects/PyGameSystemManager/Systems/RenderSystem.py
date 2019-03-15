@@ -39,20 +39,24 @@ class RenderSystem (System):
 
     def CreateTextEntity (self, message):
         entity = TextEntity(message)
-        self.entities.append(entity)
+        self.AddEntity(entity)
         return entity
 
     def CreateRect (self, width, height, color):
         entity = RectEntity(0, 0, width, height, color)
-        self.entities.append(entity)
+        self.AddEntity(entity)
         return entity
+
+    def AddEntity(self, entity):
+        self.entities.append(entity)
+        pass
 
     def DestroyEntity(self, entity):
         self.entities.remove(entity)
         pass
 
     def DestroyAllEntities(self):
-        self.entities = []
+        self.entities.clear()
         pass
 
     def Blit (self, entity):

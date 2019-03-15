@@ -51,7 +51,6 @@ class CustomGameSystem (System):
 
         # Render
         self.renderSystem = self.systemManager.GetSystem(RenderSystem)
-        self.renderSystem.DestroyAllEntities()
 
         self.RestartGame()
         pass
@@ -77,7 +76,8 @@ class CustomGameSystem (System):
 
     def RestartGame(self):
 
-        print("restart")
+        self.renderSystem.DestroyAllEntities()
+
         screenRect = self.systemManager.PG.screen.get_rect()
 
         # Score Text
@@ -101,6 +101,8 @@ class CustomGameSystem (System):
             coin = self.renderSystem.CreateRect(20, 20, Color(255, 255, 0, 255))
             coin.SetPosition(50 + i * 75, 200)
             self.coins.append(coin)
+
+
 
         pass
 
