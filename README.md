@@ -16,6 +16,7 @@ This is not a robust application architecture (e.g. MVC).
 
 <a href="https://youtu.be/DEeFTcsFk2I">
   <img src="https://raw.githubusercontent.com/RivelloMultimediaConsulting/PyGameSystemManager/master/Documentation/PyGame_Part01_Thumbnail.png" width="300" />
+  (I'm evaluating some new editing software. Pardon the temporary watermark)
 </a>
     
 Created By
