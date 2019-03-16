@@ -7,8 +7,10 @@ This is not a robust application architecture (e.g. MVC).
 
 **Features**
 
-* Python Programming
-* Python 3.7 and above supported (likely backwards compatible)
+* [Python 3.7](https://www.python.org/) 
+* [Pygame](https://www.pygame.org/) game framework for Python
+* A light-weight [Object Oriented Programming (OOP)](https://en.wikipedia.org/wiki/Object-oriented_programming) architecture for gaming.
+
 
 **Video**
 
