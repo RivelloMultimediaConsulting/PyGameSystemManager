@@ -12,6 +12,8 @@ from RMC.Scripts.Projects.PyGameSystemManager.Systems.RenderSystem import Render
 # Config ----------------------------------------------------------------------------------
 configuration = SystemManagerConfiguration()
 configuration.frameRate = 60
+configuration.screenWidth = 600
+configuration.screenHeight = 400
 configuration.projectPath = os.path.dirname(os.path.realpath(__file__))
 configuration.gameTitle = "My Custom Game"
 

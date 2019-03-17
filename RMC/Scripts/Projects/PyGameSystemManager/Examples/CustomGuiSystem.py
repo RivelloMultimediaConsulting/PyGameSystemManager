@@ -8,7 +8,6 @@ from pygame.color import Color
 from pygame.rect import Rect
 
 from RMC.Scripts.Projects.PyGameSystemManager.Examples.CustomGameSystem import CustomGameSystem
-from RMC.Scripts.Projects.PyGameSystemManager.Systems.AudioSystem import AudioSystem
 from RMC.Scripts.Projects.PyGameSystemManager.Systems.InputSystem import InputSystem
 from RMC.Scripts.Projects.PyGameSystemManager.Systems.RenderSystem import RenderSystem
 from RMC.Scripts.Projects.PyGameSystemManager.Systems.System import System
@@ -77,12 +76,14 @@ class CustomGuiSystem (System):
 
         # Score Text
         self.scoreTextEntity = self.renderSystem.CreateText("")
+        self.scoreTextEntity.SetTextColor(Color(0, 0, 0, 0))
         self.scoreTextEntity.x = 10
         self.scoreTextEntity.y = 0
         self.SetScore(0)
 
         # Restart Button Text
         self.restartTextEntity = self.renderSystem.CreateText("Restart?")
+        self.restartTextEntity.SetTextColor(Color(0, 0, 0, 0))
         self.restartTextEntity.x = screenRect.width - self.restartTextEntity.width - 10
         self.restartTextEntity.y = 0
         pass

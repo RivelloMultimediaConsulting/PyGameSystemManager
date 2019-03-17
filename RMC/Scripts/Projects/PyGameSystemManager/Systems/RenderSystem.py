@@ -37,6 +37,7 @@ class RenderSystem (System):
         pass
 
     def OnUpdate(self, deltaTime):
+
         for entity in self.entities:
             if callable(getattr(entity, "OnUpdate", None)):
                 entity.OnUpdate(deltaTime)
@@ -57,20 +58,21 @@ class RenderSystem (System):
         self.AddEntity(entity)
         return entity
 
-    def CreateAnimatedImage(self, x, y, relativePath):
+    def CreateAnimatedImage(self, x, y, width, height, relativePath, imageIndex, imageIndexMax):
         fullPath = os.path.join(self.systemManager.configuration.projectPath, relativePath)
-        entity = AnimatedImageEntity(200, 400, 32, 32, fullPath, 0)
+        entity = AnimatedImageEntity(x, y, width, height, fullPath, imageIndex, imageIndexMax)
         self.AddEntity(entity)
         return entity
 
-    def CreateImage(self, x, y, relativePath):
+    def CreateImage(self, x, y, width, height, relativePath):
         fullPath = os.path.join(self.systemManager.configuration.projectPath, relativePath)
-        entity = ImageEntity(200, 400, 32, 32, fullPath)
+        entity = ImageEntity(x, y, width, height, fullPath)
         self.AddEntity(entity)
         return entity
 
     def AddEntity(self, entity):
         self.entities.append(entity)
+        return entity
         pass
 
     def DestroyEntity(self, entity):

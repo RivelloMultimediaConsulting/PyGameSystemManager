@@ -18,11 +18,13 @@ class AnimatedImageEntity (ImageEntity):
     # Fields -----------------------------------------------------------------------------
     timeSinceLastFrame = 0
     imageIndex = 0
-    maxImageIndex = 7
+    imageIndexMax = 0
 
     # Initialization ---------------------------------------------------------------------
-    def __init__(self, x, y, width, height, relativePath, imageIndex):
+    def __init__(self, x, y, width, height, relativePath, imageIndex, imageIndexMax):
         super(AnimatedImageEntity, self).__init__(x, y, width, height, relativePath)
+        self.imageIndexMax = imageIndexMax
+        self.isSourceImageResizable = True
         self.SetImageIndex(imageIndex)
         pass
 
@@ -38,7 +40,7 @@ class AnimatedImageEntity (ImageEntity):
         if self.timeSinceLastFrame > 100:
             self.timeSinceLastFrame = 0
             self.imageIndex = self.imageIndex + 1
-            if self.imageIndex > self.maxImageIndex:
+            if self.imageIndex > self.imageIndexMax:
                 self.imageIndex = 0
         pass
 
