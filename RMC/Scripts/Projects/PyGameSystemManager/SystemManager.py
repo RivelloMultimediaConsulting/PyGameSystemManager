@@ -20,6 +20,7 @@ class SystemManager (object):
     IsPlaying = False
     systems = []
     PG = None
+    clock = None
     inputEvents = None
     configuration = None
     renderSystem = None
@@ -82,7 +83,7 @@ class SystemManager (object):
         for system in self.systems:
             system.OnStart()
 
-        clock = self.PG.time.Clock()
+        self.clock = self.PG.time.Clock()
 
         self.IsPlaying = True
 
@@ -101,13 +102,13 @@ class SystemManager (object):
             self.UpdateSystems()
             self.renderSystem.RenderFrame()
 
-            clock.tick(self.configuration.frameRate)
+            self.clock.tick(self.configuration.frameRate)
         pass
 
     def UpdateSystems(self):
 
         for system in self.systems:
-            system.OnUpdate(10)
+            system.OnUpdate(self.clock.get_time())
 
     # Event Handlers ---------------------------------------------------------------------
 

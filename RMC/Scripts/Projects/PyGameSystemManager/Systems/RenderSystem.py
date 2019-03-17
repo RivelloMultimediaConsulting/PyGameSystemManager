@@ -4,6 +4,10 @@
 ---------------------------------------------------------------------------------------"""
 
 # Imports --------------------------------------------------------------------------------
+import os
+
+from RMC.Scripts.Projects.PyGameSystemManager.Entities.AnimatedImageEntity import AnimatedImageEntity
+from RMC.Scripts.Projects.PyGameSystemManager.Entities.ImageEntity import ImageEntity
 from RMC.Scripts.Projects.PyGameSystemManager.Entities.RectEntity import RectEntity
 from RMC.Scripts.Projects.PyGameSystemManager.Entities.TextEntity import TextEntity
 from RMC.Scripts.Projects.PyGameSystemManager.Systems.System import System
@@ -34,19 +38,34 @@ class RenderSystem (System):
 
     def OnUpdate(self, deltaTime):
         for entity in self.entities:
+            if callable(getattr(entity, "OnUpdate", None)):
+                entity.OnUpdate(deltaTime)
+
             self.Blit(entity)
         pass
 
     def OnRemoved(self):
         pass
 
-    def CreateTextEntity(self, message):
+    def CreateText(self, message):
         entity = TextEntity(message)
         self.AddEntity(entity)
         return entity
 
     def CreateRect(self, width, height, color):
         entity = RectEntity(0, 0, width, height, color)
+        self.AddEntity(entity)
+        return entity
+
+    def CreateAnimatedImage(self, x, y, relativePath):
+        fullPath = os.path.join(self.systemManager.configuration.projectPath, relativePath)
+        entity = AnimatedImageEntity(200, 400, 32, 32, fullPath, 0)
+        self.AddEntity(entity)
+        return entity
+
+    def CreateImage(self, x, y, relativePath):
+        fullPath = os.path.join(self.systemManager.configuration.projectPath, relativePath)
+        entity = ImageEntity(200, 400, 32, 32, fullPath)
         self.AddEntity(entity)
         return entity
 

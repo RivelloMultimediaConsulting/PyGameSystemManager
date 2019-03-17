@@ -76,13 +76,13 @@ class CustomGuiSystem (System):
         screenRect = self.systemManager.PG.screen.get_rect()
 
         # Score Text
-        self.scoreTextEntity = self.renderSystem.CreateTextEntity("")
+        self.scoreTextEntity = self.renderSystem.CreateText("")
         self.scoreTextEntity.x = 10
         self.scoreTextEntity.y = 0
         self.SetScore(0)
 
         # Restart Button Text
-        self.restartTextEntity = self.renderSystem.CreateTextEntity("Restart?")
+        self.restartTextEntity = self.renderSystem.CreateText("Restart?")
         self.restartTextEntity.x = screenRect.width - self.restartTextEntity.width - 10
         self.restartTextEntity.y = 0
         pass

@@ -100,7 +100,7 @@ class CustomGameSystem (System):
         # Gold Coins
         self.coins = []
         for i in range(5):
-            coin = self.renderSystem.CreateRect(20, 20, Color(255, 255, 0, 255))
+            coin = self.renderSystem.CreateAnimatedImage(0, 0, "RMC/Images/Coin.png")
             coin.SetPosition(50 + i * 75, 200)
             self.coins.append(coin)
 
