@@ -7,6 +7,7 @@
 from pygame.color import Color
 from pygame.rect import Rect
 
+from RMC.Scripts.Projects.PyGameSystemManager.Systems.AudioSystem import AudioSystem
 from RMC.Scripts.Projects.PyGameSystemManager.Systems.InputSystem import InputSystem
 from RMC.Scripts.Projects.PyGameSystemManager.Systems.RenderSystem import RenderSystem
 from RMC.Scripts.Projects.PyGameSystemManager.Systems.System import System
@@ -20,6 +21,7 @@ class CustomGameSystem (System):
     # Fields -----------------------------------------------------------------------------
     inputSystem = None
     renderSystem = None
+    audioSystem = None
     guiSystem = None
     scoreTextEntity = None
     restartTextEntity = None
@@ -52,7 +54,10 @@ class CustomGameSystem (System):
         # Render
         self.renderSystem = self.systemManager.GetSystem(RenderSystem)
 
-        self.RestartGame()
+        # Audio
+        self.audioSystem = self.systemManager.GetSystem(AudioSystem)
+
+        self.StartGame()
         pass
 
     def OnUpdate(self, deltaTime):
@@ -62,7 +67,8 @@ class CustomGameSystem (System):
                 # Reward points
                 self.SetScore(self.GetScore() + 10)
 
-                # Play Sound. TODO
+                # Play Sound
+                self.audioSystem.PlaySound("RMC/Audio/CoinCollected.wav")
 
                 # Remove coin from rendering list
                 self.renderSystem.DestroyEntity(coin)
@@ -74,7 +80,7 @@ class CustomGameSystem (System):
     def OnRemoved(self):
         pass
 
-    def RestartGame(self):
+    def StartGame(self):
 
         self.renderSystem.DestroyAllEntities()
 
@@ -101,9 +107,11 @@ class CustomGameSystem (System):
             coin = self.renderSystem.CreateRect(20, 20, Color(255, 255, 0, 255))
             coin.SetPosition(50 + i * 75, 200)
             self.coins.append(coin)
+        pass
 
-
-
+    def RestartGame(self):
+        self.audioSystem.PlaySound("RMC/Audio/StartGame.wav")
+        self.StartGame()
         pass
 
     # Event Handlers ---------------------------------------------------------------------
@@ -130,5 +138,18 @@ class CustomGameSystem (System):
             elif event.key == self.systemManager.PG.K_LEFT:
                 deltaX = -1
 
-        self.CustomCharacter.x += deltaX * 10
-        self.CustomCharacter.y += deltaY * 10
+        self.MoveCharacterBy(deltaX * 10, deltaY * 10)
+
+
+    def MoveCharacterBy(self, deltaX, deltaY):
+
+        if deltaX == 0 and deltaY == 0:
+            return;
+
+        # Play Sound
+        self.audioSystem.PlaySound("RMC/Audio/Move.wav")
+
+        # Move
+        self.CustomCharacter.x += deltaX
+        self.CustomCharacter.y += deltaY
+        pass

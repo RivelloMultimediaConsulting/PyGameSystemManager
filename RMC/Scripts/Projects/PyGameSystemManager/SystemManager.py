@@ -63,7 +63,7 @@ class SystemManager (object):
         for system in self.systems:
             system.OnInitialize()
 
-        # Depend directly on system(s). TODO: Remove?
+        # Depend directly on system(s).
         self.renderSystem = self.GetSystem(RenderSystem)
 
         if self.renderSystem is not None:
