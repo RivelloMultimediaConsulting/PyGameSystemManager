@@ -15,6 +15,7 @@ class SystemManagerConfiguration (object):
     frameRate = 60
     screenWidth = 500
     screenHeight = 500
+    gameTitle = ""
     projectPath = None
 
     # Initialization ---------------------------------------------------------------------
