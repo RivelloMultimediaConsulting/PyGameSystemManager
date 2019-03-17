@@ -46,6 +46,7 @@ class CustomGameSystem (System):
 
     OnScoreChanged = EventDispatcher()
     OnGameStarted = EventDispatcher()
+    OnGameCompleted = EventDispatcher()
 
     # Properties -------------------------------------------------------------------------
     def SetScore(self, value):
@@ -85,6 +86,9 @@ class CustomGameSystem (System):
 
     def OnUpdate(self, deltaTime):
 
+        # Gravity
+        self.DoCharacterFloorDetection()
+
         if self.isPlaying is False:
             return
 
@@ -119,9 +123,9 @@ class CustomGameSystem (System):
             deltaVelocityX = 0
             self.customCharacter.x = left
             wallBumpX = 10
-        elif self.customCharacter.x - self.customCharacter.width > right:
+        elif self.customCharacter.x - self.customCharacter.GetWidth() > right:
             deltaVelocityX = 0
-            self.customCharacter.x = right + self.customCharacter.width
+            self.customCharacter.x = right + self.customCharacter.GetWidth()
             wallBumpX = -10
 
         if wallBumpX != 0:
@@ -131,7 +135,6 @@ class CustomGameSystem (System):
         # Move
         self.customCharacter.SetVelocityBy((deltaVelocityX * self.customCharacter.speed[0],
                                             -deltaVelocityY * self.customCharacter.speed[1]))
-
 
         self.MoveCharacterBy(wallBumpX, deltaPositionY)
 
@@ -150,8 +153,8 @@ class CustomGameSystem (System):
                 # Remove coin from my list
                 self.coins.remove(coin)
 
-        # Gravity
-        self.DoCharacterFloorDetection()
+        if self.coins.__len__() == 0:
+            self.CompleteGame()
 
         pass
 
@@ -178,6 +181,7 @@ class CustomGameSystem (System):
                 coin.SetPosition(150 + column * 75,
                                  self.systemManager.configuration.screenHeight - self.coinsHeightFromBottom + row * 50)
                 self.coins.append(coin)
+                print(coin.GetWidth())
 
         # Floor
         floorY = self.systemManager.configuration.screenHeight - self.floorHeightFromBottom
@@ -198,8 +202,15 @@ class CustomGameSystem (System):
         self.OnGameStarted.DispatchEvent(None)
         pass
 
+    def CompleteGame(self):
+
+        self.audioSystem.PlaySound("RMC/Audio/GameCompleted.wav")
+        self.OnGameCompleted.DispatchEvent(None)
+        self.isPlaying = False
+        pass
+
     def RestartGame(self):
-        self.audioSystem.PlaySound("RMC/Audio/StartGame.wav")
+        self.audioSystem.PlaySound("RMC/Audio/GameRestarted.wav")
         self.StartGame()
         pass
 
@@ -232,12 +243,12 @@ class CustomGameSystem (System):
 
     def DoCharacterFloorDetection(self):
 
-        if self.customCharacter.y > self.characterYFloor - self.customCharacter.height:
+        if self.customCharacter.y > self.characterYFloor - self.customCharacter.GetHeight():
 
             if self.customCharacter.isOnGround == False:
-                self.customCharacter.y = self.characterYFloor - self.customCharacter.height
+                self.customCharacter.y = self.characterYFloor - self.customCharacter.GetHeight()
                 self.customCharacter.isOnGround = True
-            self.audioSystem.PlaySound("RMC/Audio/StartGame.wav")
+            self.audioSystem.PlaySound("RMC/Audio/CharacterHitGround.wav")
         pass
 
 

@@ -16,14 +16,27 @@ class Entity (object):
     # Fields -----------------------------------------------------------------------------
     x = 0
     y = 0
-    width = None
-    height = None
+    __width = None
+    __height = None
     blittable = None
 
     # Properties -------------------------------------------------------------------------
     def GetBoundsRect(self):
-        return Rect(self.x, self.y, self.width, self.height)
+        return Rect(self.x, self.y, self.GetWidth(), self.GetHeight())
         pass
+
+    def SetWidth(self, width):
+        self.__width = width
+
+    def GetWidth(self):
+        return self.__width
+
+    def SetHeight(self, height):
+        self.__height = height
+        pass
+
+    def GetHeight(self):
+        return self.__height
 
     # Initialization ---------------------------------------------------------------------
     def __init__(self, blittable=None):
@@ -37,8 +50,8 @@ class Entity (object):
     # Methods ----------------------------------------------------------------------------
     def SetBlittable(self, blittable):
         self.blittable = blittable
-        self.width = self.blittable.get_width()
-        self.height = self.blittable.get_height()
+        self.SetWidth(self.blittable.get_width())
+        self.SetHeight(self.blittable.get_height())
         pass
 
     def Blit(self):

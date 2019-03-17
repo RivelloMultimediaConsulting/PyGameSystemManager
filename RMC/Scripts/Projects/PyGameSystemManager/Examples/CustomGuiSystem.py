@@ -47,6 +47,7 @@ class CustomGuiSystem (System):
         self.customGameSystem = self.systemManager.GetSystem(CustomGameSystem)
         self.customGameSystem.OnScoreChanged += self.CustomGameSystem_OnScoreChanged
         self.customGameSystem.OnGameStarted += self.CustomGameSystem_OnGameStarted
+        self.customGameSystem.OnGameCompleted += self.CustomGameSystem_OnGameCompleted
 
         # Render
         self.renderSystem = self.systemManager.GetSystem(RenderSystem)
@@ -85,18 +86,23 @@ class CustomGuiSystem (System):
         # Restart Button Text
         self.restartTextEntity = self.renderSystem.CreateText("Restart?")
         self.restartTextEntity.SetTextColor(Color(0, 0, 0, 0))
-        self.restartTextEntity.x = screenRect.width - self.restartTextEntity.width - 10
+        self.restartTextEntity.x = screenRect.width - self.restartTextEntity.GetWidth() - 10
         self.restartTextEntity.y = 0
 
-        # Win Text
-        self.gameoverWinTextEntity = self.renderSystem.CreateText("You Win!", 10)
-        self.gameoverWinTextEntity.SetTextColor(Color(0, 0, 0, 0))
-        print(self.restartTextEntity.width )
-        self.gameoverWinTextEntity.x = screenRect.width/2 - self.restartTextEntity.width - 10
-        self.gameoverWinTextEntity.y = 0
+        pass
 
+    def CustomGameSystem_OnGameCompleted(self, value):
+
+        screenRect = self.systemManager.PG.screen.get_rect()
+
+        # Win Text
+        self.gameoverWinTextEntity = self.renderSystem.CreateText("You Win!", 100)
+        self.gameoverWinTextEntity.SetTextColor(Color(0, 0, 0, 0))
+        self.gameoverWinTextEntity.x = screenRect.width / 2 - self.gameoverWinTextEntity.GetWidth() / 2 - 10
+        self.gameoverWinTextEntity.y = 20
 
         pass
+
 
     def InputSystem_OnInput(self, event):
 

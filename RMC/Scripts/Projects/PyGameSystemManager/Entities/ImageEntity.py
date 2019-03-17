@@ -25,8 +25,8 @@ class ImageEntity (Entity):
     def __init__(self, x, y, width, height, relativePath):
         self.x = x
         self.y = y
-        self.width = width
-        self.height = height
+        self.SetWidth(width)
+        self.SetHeight(height)
         self.relativePath = relativePath
         self.LoadImage()
         pass
@@ -36,7 +36,7 @@ class ImageEntity (Entity):
         self.blittable = AssetLibrary.LoadImage(self.relativePath)
 
         if self.isSourceImageResizable:
-            self.blittable = pygame.transform.scale(self.blittable, (self.width, self.height))
+            self.blittable = pygame.transform.scale(self.blittable, (self.GetWidth(), self.GetHeight()))
 
         pass
 

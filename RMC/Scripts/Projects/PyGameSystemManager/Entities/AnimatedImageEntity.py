@@ -48,8 +48,8 @@ class AnimatedImageEntity (ImageEntity):
 
     def Blit (self, screen):
         top = 0
-        left = self.imageIndex * self.width
-        screen.blit(self.blittable, (self.x, self.y), (left, top, self.width, self.height))
+        left = self.imageIndex * self.GetWidth()
+        screen.blit(self.blittable, (self.x, self.y), (left, top, self.GetWidth(), self.GetHeight()))
         pass
 
     # Event Handlers ---------------------------------------------------------------------
