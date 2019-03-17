@@ -101,15 +101,39 @@ class CustomGameSystem (System):
         if self.isInputPressedUp is True:
             # Only allow jumps from ground
             if self.customCharacter.isOnGround:
+
                 deltaPositionY = -1
                 deltaVelocityY = self.customCharacter.speed[1]
                 self.customCharacter.isOnGround = False
 
+                # Play Sound
+                self.audioSystem.PlaySound("RMC/Audio/CharacterJump.wav")
+
+
+        # Keep the character on the screen
+        left = 0
+        right = self.systemManager.configuration.screenHeight + 100
+
+        wallBumpX = 0;
+        if self.customCharacter.x < left:
+            deltaVelocityX = 0
+            self.customCharacter.x = left
+            wallBumpX = 10
+        elif self.customCharacter.x - self.customCharacter.width > right:
+            deltaVelocityX = 0
+            self.customCharacter.x = right + self.customCharacter.width
+            wallBumpX = -10
+
+        if wallBumpX != 0:
+            # Play Sound
+            self.audioSystem.PlaySound("RMC/Audio/CharacterHitGround.wav")
 
         # Move
-        self.customCharacter.SetVelocityBy( (deltaVelocityX * self.customCharacter.speed[0],
-                                             -deltaVelocityY * self.customCharacter.speed[1]))
-        self.MoveCharacterBy(0, deltaPositionY)
+        self.customCharacter.SetVelocityBy((deltaVelocityX * self.customCharacter.speed[0],
+                                            -deltaVelocityY * self.customCharacter.speed[1]))
+
+
+        self.MoveCharacterBy(wallBumpX, deltaPositionY)
 
         # Coins
         for coin in self.coins[:]:
@@ -139,7 +163,7 @@ class CustomGameSystem (System):
         self.renderSystem.DestroyAllEntities()
 
         # Background
-        self.background = self.renderSystem.CreateImage(0, 0, 100, 100, "RMC/Images/Background.png")
+        self.background = self.renderSystem.CreateImage(0, 0, 600, 400, "RMC/Images/Background.png")
         self.background.SetPosition(0, 0)
 
         # Main Character
@@ -170,7 +194,7 @@ class CustomGameSystem (System):
             grassX = grassX + random.randint(100, 250)
             grass.SetPosition(grassX, floorY - 30)
 
-        self.isPlaying is True
+        self.isPlaying = True
         self.OnGameStarted.DispatchEvent(None)
         pass
 
@@ -221,9 +245,6 @@ class CustomGameSystem (System):
 
         if deltaX == 0 and deltaY == 0:
             return;
-
-        # Play Sound
-        self.audioSystem.PlaySound("RMC/Audio/CharacterJump.wav")
 
         # Move
         self.customCharacter.x += deltaX

@@ -19,7 +19,7 @@ class ImageEntity (Entity):
 
     # Fields -----------------------------------------------------------------------------
     relativePath = None
-    isSourceImageResizable = False
+    isSourceImageResizable = True
 
     # Initialization ---------------------------------------------------------------------
     def __init__(self, x, y, width, height, relativePath):
@@ -44,8 +44,6 @@ class ImageEntity (Entity):
         screen.blit(self.blittable, (self.x, self.y))
         pass
 
-    def __Refresh(self):
-        pass
     # Event Handlers ---------------------------------------------------------------------
 
 

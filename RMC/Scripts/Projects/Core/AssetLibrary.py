@@ -7,7 +7,8 @@
 import pygame
 
 # Namespace ------------------------------------------------------------------------------
-_image_library = {}
+_asset__library_images = {}
+_asset__library_sounds = {}
 
 # Class ----------------------------------------------------------------------------------
 
@@ -25,15 +26,29 @@ class AssetLibrary (object):
     @staticmethod
     def LoadImage (fullPath):
 
-        global _image_library
+        global _asset__library_images
 
-        image = _image_library.get(fullPath)
+        image = _asset__library_images.get(fullPath)
 
-        if image == None:
+        if image is None:
             image = pygame.image.load(fullPath)
-            _image_library[fullPath] = image
+            _asset__library_images[fullPath] = image
 
         return image
+        pass
+
+    @staticmethod
+    def LoadSound (fullPath):
+
+        global _asset__library_sounds
+
+        sound = _asset__library_sounds.get(fullPath)
+
+        if sound is None:
+            sound = pygame.mixer.Sound(fullPath)
+            _asset__library_sounds[fullPath] = sound
+
+        return sound
         pass
 
     # Event Handlers ---------------------------------------------------------------------

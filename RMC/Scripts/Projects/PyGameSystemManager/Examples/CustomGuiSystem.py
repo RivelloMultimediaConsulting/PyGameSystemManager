@@ -24,6 +24,7 @@ class CustomGuiSystem (System):
     renderSystem = None
     scoreTextEntity = None
     restartTextEntity = None
+    gameoverWinTextEntity = None
 
     # Properties -------------------------------------------------------------------------
 
@@ -86,6 +87,15 @@ class CustomGuiSystem (System):
         self.restartTextEntity.SetTextColor(Color(0, 0, 0, 0))
         self.restartTextEntity.x = screenRect.width - self.restartTextEntity.width - 10
         self.restartTextEntity.y = 0
+
+        # Win Text
+        self.gameoverWinTextEntity = self.renderSystem.CreateText("You Win!", 10)
+        self.gameoverWinTextEntity.SetTextColor(Color(0, 0, 0, 0))
+        print(self.restartTextEntity.width )
+        self.gameoverWinTextEntity.x = screenRect.width/2 - self.restartTextEntity.width - 10
+        self.gameoverWinTextEntity.y = 0
+
+
         pass
 
     def InputSystem_OnInput(self, event):

@@ -6,6 +6,7 @@
 # Imports --------------------------------------------------------------------------------
 import os
 
+from RMC.Scripts.Projects.Core.AssetLibrary import AssetLibrary
 from RMC.Scripts.Projects.EventDispatcher.EventDispatcher import EventDispatcher
 from RMC.Scripts.Projects.PyGameSystemManager.Systems.System import System
 
@@ -43,7 +44,7 @@ class AudioSystem (System):
     def PlaySound(self, relativePath):
 
         fullPath = os.path.join(self.systemManager.configuration.projectPath, relativePath)
-        effect = self.systemManager.PG.mixer.Sound(fullPath)
+        effect = AssetLibrary.LoadSound(fullPath)
         effect.play()
         pass
 

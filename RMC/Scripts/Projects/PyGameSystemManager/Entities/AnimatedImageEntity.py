@@ -22,9 +22,11 @@ class AnimatedImageEntity (ImageEntity):
 
     # Initialization ---------------------------------------------------------------------
     def __init__(self, x, y, width, height, relativePath, imageIndex, imageIndexMax):
+
+        self.isSourceImageResizable = False
+
         super(AnimatedImageEntity, self).__init__(x, y, width, height, relativePath)
         self.imageIndexMax = imageIndexMax
-        self.isSourceImageResizable = True
         self.SetImageIndex(imageIndex)
         pass
 

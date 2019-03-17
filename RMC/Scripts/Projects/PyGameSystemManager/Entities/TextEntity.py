@@ -17,7 +17,7 @@ class TextEntity (Entity):
     # Fields -----------------------------------------------------------------------------
     text = None
     __textColor = (128, 0, 0, 0)
-    textSize = 30
+    __fontSize = 30
 
     # Properties -------------------------------------------------------------------------
     def SetTextColor(self, textColor):
@@ -29,7 +29,11 @@ class TextEntity (Entity):
         return self.__textColor;
 
     # Initialization ---------------------------------------------------------------------
-    def __init__(self, text):
+    def __init__(self, text, fontSize=None):
+
+        if fontSize is not None:
+            self.__fontSize = fontSize
+
         self.SetText(text)
         pass
 
@@ -44,7 +48,7 @@ class TextEntity (Entity):
         pass
 
     def __Refresh(self):
-        font = pygame.font.SysFont("arial", self.textSize)
+        font = pygame.font.SysFont("arial", self.__fontSize)
         self.SetBlittable(font.render(str(self.text), True, self.__textColor))
         pass
     # Event Handlers ---------------------------------------------------------------------

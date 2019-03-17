@@ -15,10 +15,10 @@ class CustomCharacterEntity (AnimatedImageEntity):
 
     # Fields -----------------------------------------------------------------------------
     __velocity = [0, 0]
-    __velocityMin = [-10, -15]
-    __velocityMax = [10, 15]
+    __velocityMin = [-10, -30]
+    __velocityMax = [10, 30]
 
-    speed = [10, 20]
+    speed = [10, 5]
 
     isOnGround = False
     __gravity = [0, 1]
@@ -62,8 +62,6 @@ class CustomCharacterEntity (AnimatedImageEntity):
                 velocityXNew *= 0.9
         else:
             velocityXNew=0
-
-        print(velocityXNew)
 
         # Sometimes handle falling
         if self.isOnGround is False:

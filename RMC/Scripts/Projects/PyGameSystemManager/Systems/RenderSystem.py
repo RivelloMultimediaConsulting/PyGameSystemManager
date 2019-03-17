@@ -48,8 +48,8 @@ class RenderSystem (System):
     def OnRemoved(self):
         pass
 
-    def CreateText(self, message):
-        entity = TextEntity(message)
+    def CreateText(self, message, fontSize=None):
+        entity = TextEntity(message, fontSize)
         self.AddEntity(entity)
         return entity
 
