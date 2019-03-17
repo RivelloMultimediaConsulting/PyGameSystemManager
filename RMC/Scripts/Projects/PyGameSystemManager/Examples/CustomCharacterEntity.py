@@ -18,7 +18,7 @@ class CustomCharacterEntity (AnimatedImageEntity):
     __velocityMin = [-10, -30]
     __velocityMax = [10, 30]
 
-    speed = [10, 5]
+    speed = [5, 5]
 
     isOnGround = False
     __gravity = [0, 1]

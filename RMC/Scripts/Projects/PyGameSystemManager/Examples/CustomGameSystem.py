@@ -114,7 +114,7 @@ class CustomGameSystem (System):
                 self.audioSystem.PlaySound("RMC/Audio/CharacterJump.wav")
 
 
-        # Keep the character on the screen
+        # Handle Wall Collision
         left = 0
         right = self.systemManager.configuration.screenHeight + 100
 
@@ -122,15 +122,16 @@ class CustomGameSystem (System):
         if self.customCharacter.x < left:
             deltaVelocityX = 0
             self.customCharacter.x = left
-            wallBumpX = 10
+            wallBumpX = 5
         elif self.customCharacter.x - self.customCharacter.GetWidth() > right:
             deltaVelocityX = 0
             self.customCharacter.x = right + self.customCharacter.GetWidth()
-            wallBumpX = -10
+            wallBumpX = -5
 
         if wallBumpX != 0:
             # Play Sound
             self.audioSystem.PlaySound("RMC/Audio/CharacterHitGround.wav")
+            self.customCharacter.SetVelocity((0, self.customCharacter.GetVelocity()[1]))
 
         # Move
         self.customCharacter.SetVelocityBy((deltaVelocityX * self.customCharacter.speed[0],
@@ -175,13 +176,12 @@ class CustomGameSystem (System):
 
         # Gold Coins
         self.coins = []
-        for row in range(3):
+        for row in range(2):
             for column in range(5):
                 coin = self.renderSystem.CreateAnimatedImage(0, 0, 32, 32, "RMC/Images/Coin.png", 0, 7)
                 coin.SetPosition(150 + column * 75,
-                                 self.systemManager.configuration.screenHeight - self.coinsHeightFromBottom + row * 50)
+                                 self.systemManager.configuration.screenHeight - self.coinsHeightFromBottom + row * 100)
                 self.coins.append(coin)
-                print(coin.GetWidth())
 
         # Floor
         floorY = self.systemManager.configuration.screenHeight - self.floorHeightFromBottom
