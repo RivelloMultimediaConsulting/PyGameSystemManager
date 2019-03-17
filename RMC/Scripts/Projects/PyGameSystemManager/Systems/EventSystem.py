@@ -23,7 +23,10 @@ class EventSystem (System):
         super(EventSystem, self).OnAdded(systemManager)
         pass
 
-    def OnInitialize (self):
+    def OnInitialize(self):
+        pass
+
+    def OnStart(self):
         pass
 
     def OnUpdate(self, deltaTime):

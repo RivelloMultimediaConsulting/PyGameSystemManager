@@ -60,6 +60,8 @@ class SystemManager (object):
         self.PG.screen = self.PG.display.set_mode(
             (self.configuration.screenWidth, self.configuration.screenHeight))
 
+        self.PG.display.set_caption(self.configuration.gameTitle)
+
         for system in self.systems:
             system.OnInitialize()
 
@@ -71,11 +73,14 @@ class SystemManager (object):
 
         return
 
-    def Play(self):
+    def StartSystems(self):
 
         if self.IsInitialized is False:
             raise Exception("Play() cannot be called when self.IsInitialized is False")
             return
+
+        for system in self.systems:
+            system.OnStart()
 
         clock = self.PG.time.Clock()
 

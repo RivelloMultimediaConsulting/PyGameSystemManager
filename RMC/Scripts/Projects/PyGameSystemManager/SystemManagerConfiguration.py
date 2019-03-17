@@ -15,6 +15,7 @@ class SystemManagerConfiguration (object):
     frameRate = 60
     screenWidth = 500
     screenHeight = 500
+    projectPath = None
 
     # Initialization ---------------------------------------------------------------------
     def __init__(self):

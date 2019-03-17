@@ -26,13 +26,16 @@ class System (object):
         self.PG = self.systemManager.PG
         pass
 
-    def OnInitialize (self):
+    def OnInitialize(self):
         pass
 
-    def OnUpdate (self, deltaTime):
+    def OnStart(self):
         pass
 
-    def OnRemoved (self):
+    def OnUpdate(self, deltaTime):
+        pass
+
+    def OnRemoved(self):
         pass
     # Event Handlers ---------------------------------------------------------------------
 

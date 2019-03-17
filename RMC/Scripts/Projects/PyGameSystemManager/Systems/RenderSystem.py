@@ -29,6 +29,9 @@ class RenderSystem (System):
     def OnInitialize(self):
         pass
 
+    def OnStart(self):
+        pass
+
     def OnUpdate(self, deltaTime):
         for entity in self.entities:
             self.Blit(entity)
@@ -37,12 +40,12 @@ class RenderSystem (System):
     def OnRemoved(self):
         pass
 
-    def CreateTextEntity (self, message):
+    def CreateTextEntity(self, message):
         entity = TextEntity(message)
         self.AddEntity(entity)
         return entity
 
-    def CreateRect (self, width, height, color):
+    def CreateRect(self, width, height, color):
         entity = RectEntity(0, 0, width, height, color)
         self.AddEntity(entity)
         return entity

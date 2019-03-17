@@ -7,6 +7,7 @@
 from pygame.color import Color
 from pygame.rect import Rect
 
+from RMC.Scripts.Projects.EventDispatcher.EventDispatcher import EventDispatcher
 from RMC.Scripts.Projects.PyGameSystemManager.Systems.AudioSystem import AudioSystem
 from RMC.Scripts.Projects.PyGameSystemManager.Systems.InputSystem import InputSystem
 from RMC.Scripts.Projects.PyGameSystemManager.Systems.RenderSystem import RenderSystem
@@ -25,13 +26,17 @@ class CustomGameSystem (System):
     guiSystem = None
     scoreTextEntity = None
     restartTextEntity = None
-    score = 0
     coins = []
+    score = 0
+    characterSpeed = 30
+    OnScoreChanged = EventDispatcher()
+    OnGameStarted = EventDispatcher()
 
     # Properties -------------------------------------------------------------------------
     def SetScore(self, value):
         self.score = value
-        self.scoreTextEntity.SetText("Score: " + str(self.score))
+        self.OnScoreChanged.DispatchEvent(self.score)
+        pass
 
     def GetScore(self):
         return self.score
@@ -45,7 +50,7 @@ class CustomGameSystem (System):
         super(CustomGameSystem, self).OnAdded(systemManager)
         pass
 
-    def OnInitialize (self):
+    def OnInitialize(self):
 
         # Input
         self.inputSystem = self.systemManager.GetSystem(InputSystem)
@@ -57,6 +62,10 @@ class CustomGameSystem (System):
         # Audio
         self.audioSystem = self.systemManager.GetSystem(AudioSystem)
 
+
+        pass
+
+    def OnStart(self):
         self.StartGame()
         pass
 
@@ -84,19 +93,6 @@ class CustomGameSystem (System):
 
         self.renderSystem.DestroyAllEntities()
 
-        screenRect = self.systemManager.PG.screen.get_rect()
-
-        # Score Text
-        self.scoreTextEntity = self.renderSystem.CreateTextEntity("Score: X")
-        self.scoreTextEntity.x = 10
-        self.scoreTextEntity.y = 0
-        self.SetScore(0)
-
-        # Restart Button Text
-        self.restartTextEntity = self.renderSystem.CreateTextEntity("Restart?")
-        self.restartTextEntity.x = screenRect.width - self.restartTextEntity.width - 10
-        self.restartTextEntity.y = 0
-
         # Main Character
         self.CustomCharacter = self.renderSystem.CreateRect(60, 60, Color(0, 0, 255, 255));
         self.CustomCharacter.SetPosition(100, 100)
@@ -107,6 +103,8 @@ class CustomGameSystem (System):
             coin = self.renderSystem.CreateRect(20, 20, Color(255, 255, 0, 255))
             coin.SetPosition(50 + i * 75, 200)
             self.coins.append(coin)
+
+        self.OnGameStarted.DispatchEvent(None)
         pass
 
     def RestartGame(self):
@@ -115,16 +113,10 @@ class CustomGameSystem (System):
         pass
 
     # Event Handlers ---------------------------------------------------------------------
-    def InputSystem_OnInput (self, event):
+    def InputSystem_OnInput(self, event):
 
         deltaX = 0
         deltaY = 0
-
-        if event.type == self.systemManager.PG.MOUSEBUTTONDOWN:
-            mouse = self.systemManager.PG.mouse.get_pos()
-            if self.restartTextEntity.GetBoundsRect().contains(Rect(mouse[0], mouse[1], 1, 1)):
-                self.RestartGame();
-                pass
 
         if event.type == self.systemManager.PG.KEYDOWN:
 
@@ -138,7 +130,7 @@ class CustomGameSystem (System):
             elif event.key == self.systemManager.PG.K_LEFT:
                 deltaX = -1
 
-        self.MoveCharacterBy(deltaX * 10, deltaY * 10)
+        self.MoveCharacterBy(deltaX * self.characterSpeed, deltaY * self.characterSpeed)
 
 
     def MoveCharacterBy(self, deltaX, deltaY):

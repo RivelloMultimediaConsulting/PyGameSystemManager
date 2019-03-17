@@ -1,8 +1,8 @@
 # Imports --------------------------------------------------------------------------------
 import os
-
 import pygame
 from RMC.Scripts.Projects.PyGameSystemManager.Examples.CustomGameSystem import CustomGameSystem
+from RMC.Scripts.Projects.PyGameSystemManager.Examples.CustomGuiSystem import CustomGuiSystem
 from RMC.Scripts.Projects.PyGameSystemManager.Systems.AudioSystem import AudioSystem
 from RMC.Scripts.Projects.PyGameSystemManager.Systems.EventSystem import EventSystem
 from RMC.Scripts.Projects.PyGameSystemManager.Systems.InputSystem import InputSystem
@@ -14,6 +14,7 @@ from RMC.Scripts.Projects.PyGameSystemManager.Systems.RenderSystem import Render
 configuration = SystemManagerConfiguration()
 configuration.frameRate = 60
 configuration.projectPath = os.path.dirname(os.path.realpath(__file__))
+configuration.gameTitle = "My Custom Game"
 
 # Create Manager --------------------------------------------------------------------------
 systemManager = SystemManager(pygame, configuration)
@@ -26,10 +27,11 @@ systemManager.AddSystem(AudioSystem())
 
 # Add Custom Systems ----------------------------------------------------------------------
 systemManager.AddSystem(CustomGameSystem())
+systemManager.AddSystem(CustomGuiSystem())
 
 # Start -----------------------------------------------------------------------------------
 systemManager.InitializeSystems()
-systemManager.Play()
+systemManager.StartSystems()
 
 
 
