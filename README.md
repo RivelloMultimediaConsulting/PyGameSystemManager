@@ -27,7 +27,7 @@ I created this during my first week of learning Python. I bring 19+ years of gam
 **Video**
 
 <a href="https://youtu.be/XLIMAjdPhpE">
-  <img src="https://raw.githubusercontent.com/RivelloMultimediaConsulting/PyGameSystemManager/master/Documentation/PyGame_Part01_Thumbnail01.png" width="300" />
+  <img src="https://raw.githubusercontent.com/RivelloMultimediaConsulting/PyGameSystemManager/master/Documentation/PyGame_Part01_Thumbnail01.png" width="150" />
   
 </a>
     
