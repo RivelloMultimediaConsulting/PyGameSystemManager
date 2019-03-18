@@ -26,11 +26,10 @@ I created this during my first week of learning Python. I bring 19+ years of gam
 
 **Video**
 
-<a href="https://youtu.be/XLIMAjdPhpE">
-  <img src="https://raw.githubusercontent.com/RivelloMultimediaConsulting/PyGameSystemManager/master/Documentation/PyGame_Part01_Thumbnail01.png" width="150" />
+* <img src="https://cdn2.iconfinder.com/data/icons/social-media-2161/512/Line-icon_movies_social_videos_web_youtube-512.png" width = "30"> <a href="https://youtu.be/XLIMAjdPhpE" target="_blank">PyGameSystemManager - Part01</a>
+* <img src="https://cdn2.iconfinder.com/data/icons/social-media-2161/512/Line-icon_movies_social_videos_web_youtube-512.png" width = "30"> <a href="https://youtu.be/qjA9vYtS54c" target="_blank">PyGameSystemManager - Part02</a>
+* <img src="https://cdn2.iconfinder.com/data/icons/social-media-2161/512/Line-icon_movies_social_videos_web_youtube-512.png" width = "30"> <a href="https://youtu.be/0WFjoRviPvM" target="_blank">PyGameSystemManager - Part03</a>
   
-</a>
-    
 Created By
 =============
 
