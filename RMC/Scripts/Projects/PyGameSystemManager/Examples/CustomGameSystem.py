@@ -116,16 +116,16 @@ class CustomGameSystem (System):
 
         # Handle Wall Collision
         left = 0
-        right = self.systemManager.configuration.screenHeight + 100
+        right = self.systemManager.configuration.screenRect[2]
 
         wallBumpX = 0;
         if self.customCharacter.x < left:
             deltaVelocityX = 0
             self.customCharacter.x = left
             wallBumpX = 5
-        elif self.customCharacter.x - self.customCharacter.GetWidth() > right:
+        elif self.customCharacter.x + self.customCharacter.GetWidth() > right:
             deltaVelocityX = 0
-            self.customCharacter.x = right + self.customCharacter.GetWidth()
+            self.customCharacter.x = right - self.customCharacter.GetWidth()
             wallBumpX = -5
 
         if wallBumpX != 0:
@@ -172,7 +172,7 @@ class CustomGameSystem (System):
 
         # Main Character
         self.customCharacter = self.renderSystem.AddEntity(CustomCharacterEntity())
-        self.customCharacter.SetPosition(100, self.systemManager.configuration.screenHeight - self.characterHeightFromBottom)
+        self.customCharacter.SetPosition(100, self.systemManager.configuration.screenRect[2] - self.characterHeightFromBottom)
 
         # Gold Coins
         self.coins = []
@@ -180,13 +180,13 @@ class CustomGameSystem (System):
             for column in range(5):
                 coin = self.renderSystem.CreateAnimatedImage(0, 0, 32, 32, "RMC/Images/Coin.png", 0, 7)
                 coin.SetPosition(150 + column * 75,
-                                 self.systemManager.configuration.screenHeight - self.coinsHeightFromBottom + row * 100)
+                                 self.systemManager.configuration.screenRect[3] - self.coinsHeightFromBottom + row * 100)
                 self.coins.append(coin)
 
         # Floor
-        floorY = self.systemManager.configuration.screenHeight - self.floorHeightFromBottom
+        floorY = self.systemManager.configuration.screenRect[3] - self.floorHeightFromBottom
         self.characterYFloor = floorY + 10
-        blocksToCreate = 1 + int(self.systemManager.configuration.screenWidth / 32)
+        blocksToCreate = 1 + int(self.systemManager.configuration.screenRect[2] / 32)
         for i in range(blocksToCreate):
             floor = self.renderSystem.CreateImage(0, 0, 32, 32, "RMC/Images/Block.png")
             floor.SetPosition(i * 32, floorY)

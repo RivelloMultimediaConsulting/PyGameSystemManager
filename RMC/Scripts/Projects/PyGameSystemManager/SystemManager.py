@@ -8,6 +8,7 @@
 # Namespace ------------------------------------------------------------------------------
 
 # Class ----------------------------------------------------------------------------------
+import os
 from types import ModuleType
 
 from RMC.Scripts.Projects.PyGameSystemManager.Systems.RenderSystem import RenderSystem
@@ -58,8 +59,13 @@ class SystemManager (object):
     def InitializeSystems(self):
 
         self.PG.init()
+
+        x = self.configuration.screenRect[0]
+        y = self.configuration.screenRect[1]
+        os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (x, y)
+
         self.PG.screen = self.PG.display.set_mode(
-            (self.configuration.screenWidth, self.configuration.screenHeight))
+            (self.configuration.screenRect[2], self.configuration.screenRect[3]))
 
         self.PG.display.set_caption(self.configuration.gameTitle)
 
