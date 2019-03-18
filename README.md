@@ -1,16 +1,26 @@
 PyGameSystemManager
 =============
 
-A simple system to organize high-level "manager" classes in your PyGame projects.
+This is a simple system to organize high-level "system" classes in your PyGame game projects.
 
-This is not a robust application architecture (e.g. MVC).
+It is not a fully robust application architecture (e.g. MVC).
 
-**Features**
+I created this during my first week of learning Python. I bring 19+ years of gaming experience to this small project.
+
+**Details**
 
 * [Python 3.7](https://www.python.org/) 
 * [Pygame](https://www.pygame.org/) game framework for Python
 * A light-weight [Object Oriented Programming (OOP)](https://en.wikipedia.org/wiki/Object-oriented_programming) architecture for gaming.
 
+**PyGameSystemManager Features**
+
+* **Examples/CustomGameSystem:** The core game-specific logic including layout and win/loss conditions
+* **Examples/CustomGuiSystem:** Handles game-specific text and buttons
+* **Examples/CustomCharacterEnity:** Subclass of the entity concept which renders to the screen
+* **AudioSystem:** Renders all **Audio**
+* **InputSystem:** Captures PyGame input and dispatches as events to subscribers
+* **RenderSystem:** Renders all **Entity** subclasses to the screen
 
 **Video**
 * (I'm evaluating some new editing software. Pardon the temporary watermark)
