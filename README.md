@@ -35,5 +35,5 @@ I created this during my first week of learning Python. I bring 19+ years of gam
 Created By
 =============
 
-- Samuel Asher Rivello: <a href="https://twitter.com/srivello/">@srivello</a>, <a href="http://www.github.com/RivelloMultimediaConsulting/">Github</a>, <a href="http://RivelloMultimediaConsulting.com/unity/">RivelloMultimediaConsulting.com</a>, <a href="http://www.SamuelAsherRivello.com">SamuelAsherRivello.com</a>
+- Samuel Asher Rivello: <a href="https://twitter.com/srivello/" target="_blank">@srivello</a>, <a href="http://www.github.com/RivelloMultimediaConsulting/">Github</a>, <a href="http://RivelloMultimediaConsulting.com/unity/">RivelloMultimediaConsulting.com</a>, <a href="http://www.SamuelAsherRivello.com">SamuelAsherRivello.com</a>
 
