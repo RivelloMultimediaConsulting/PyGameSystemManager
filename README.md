@@ -1,8 +1,8 @@
 PyGameSystemManager
 =============
 
-![Screenshot](https://raw.githubusercontent.com/RivelloMultimediaConsulting/PyGameSystemManager/master/Documentation/PyGameSystemManager_Screenshot.png)
-
+<img src="https://raw.githubusercontent.com/RivelloMultimediaConsulting/PyGameSystemManager/master/Documentation/PyGameSystemManager_Screenshot.png" width="500" />
+  
 This is a simple system to organize high-level "system" classes in your PyGame game projects.
 
 It is not a fully robust application architecture (e.g. MVC).
