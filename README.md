@@ -25,9 +25,7 @@ I created this during my first week of learning Python. I bring 19+ years of gam
 * **RenderSystem:** Renders all **Entity** subclasses to the screen
 
 **Video**
-* (I'm evaluating some new editing software. Pardon the temporary watermark)
-
-<a href="https://youtu.be/DEeFTcsFk2I">
+<a href="https://youtu.be/XLIMAjdPhpE">
   <img src="https://raw.githubusercontent.com/RivelloMultimediaConsulting/PyGameSystemManager/master/Documentation/PyGame_Part01_Thumbnail.png" width="300" />
   
 </a>
