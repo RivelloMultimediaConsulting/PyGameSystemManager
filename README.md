@@ -1,11 +1,13 @@
 PyGameSystemManager
 =============
 
-A simple system to organize high-level "manager" classes in your PyGame projects.
+This is a simple system to organize high-level "system" classes in your PyGame game projects.
 
-This is not a robust application architecture (e.g. MVC).
+It is not a fully robust application architecture (e.g. MVC).
 
-**Details **
+I created this during my first week of learning Python. I bring 19+ years of gaming experience to this small project.
+
+**Details**
 
 * [Python 3.7](https://www.python.org/) 
 * [Pygame](https://www.pygame.org/) game framework for Python
