@@ -11,8 +11,8 @@ I created this during my first week of learning Python. I bring 19+ years of gam
 
 **Details**
 
-* [Python 3.7](https://www.python.org/) 
-* [Pygame](https://www.pygame.org/) game framework for Python
+* [Python 3.7.0](https://www.python.org/) 
+* [PyGame 1.9.4](https://www.pygame.org/) game framework for Python
 * A light-weight [Object Oriented Programming (OOP)](https://en.wikipedia.org/wiki/Object-oriented_programming) architecture for gaming.
 
 **PyGameSystemManager Features**
