@@ -11,9 +11,9 @@ I created this during my first week of learning Python. I bring 19+ years of gam
 
 **Details**
 
-* [Python 3.7.0](https://www.python.org/) 
-* [PyGame 1.9.4](https://www.pygame.org/) game framework for Python
-* A light-weight [Object Oriented Programming (OOP)](https://en.wikipedia.org/wiki/Object-oriented_programming) architecture for gaming.
+* <a href="https://www.python.org/" target="_blank">Python 3.7.0</a>
+* <a href="https://www.pygame.org/" target="_blank">PyGame 1.9.4</a>
+* A light-weight <a href="https://en.wikipedia.org/wiki/Object-oriented_programming" target="_blank">Object Oriented Programming (OOP) architecture for gaming.</a>
 
 **PyGameSystemManager Features**
 
@@ -35,5 +35,5 @@ I created this during my first week of learning Python. I bring 19+ years of gam
 Created By
 =============
 
-- Samuel Asher Rivello: <a href="https://twitter.com/srivello/" target="_blank">@srivello</a>, <a href="http://www.github.com/RivelloMultimediaConsulting/">Github</a>, <a href="http://RivelloMultimediaConsulting.com/unity/">RivelloMultimediaConsulting.com</a>, <a href="http://www.SamuelAsherRivello.com">SamuelAsherRivello.com</a>
+- Samuel Asher Rivello: <a href="https://twitter.com/srivello/" target="_blank">@srivello</a>, <a href="http://www.github.com/RivelloMultimediaConsulting/ target="_blank"">Github</a>, <a href="http://RivelloMultimediaConsulting.com/unity/" target="_blank">RivelloMultimediaConsulting.com</a>, <a href="http://www.SamuelAsherRivello.com" target="_blank">SamuelAsherRivello.com</a>
 
