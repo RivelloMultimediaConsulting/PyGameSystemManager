@@ -3,7 +3,7 @@ PyGameSystemManager
 
 <img src="https://raw.githubusercontent.com/RivelloMultimediaConsulting/PyGameSystemManager/master/Documentation/PyGameSystemManager_Screenshot01.png" width="500" />
   
-This is a simple system to organize high-level "system" classes in your PyGame game projects.
+This is a simple manager to organize high-level "system" classes in your PyGame game projects. Each system is independent but may access others through a centralized locator. 
 
 It is not a fully robust application architecture (e.g. MVC).
 
